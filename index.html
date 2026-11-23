@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reconhecimento Facial - FMP</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="estilo.css">
+<!-- face-api.js (vladmandic 1.7.15) incluído no projeto: não depende de CDN -->
+<script src="lib/face-api.js"></script>
+</head>
+<body>
+<div class="carregando" id="carregando">
+  <div><div class="giro"></div><p id="carregandoTexto">Carregando modelos de reconhecimento...</p></div>
+</div>
+
+<header>
+  <div class="marca">
+    <div class="logo">◉</div>
+    <div>
+      <h1>Reconhecimento Facial — FMP</h1>
+      <small>Protótipo acadêmico · o resultado indica semelhança provável, não confirma identidade</small>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <div class="tela" id="telaVideo">
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="overlay"></canvas>
+      <span class="canto a"></span><span class="canto b"></span><span class="canto c"></span><span class="canto d"></span>
+    </div>
+    <div class="tela oculto" id="telaFoto"><img id="foto" alt="Foto com resultado"></div>
+
+    <div id="resultado">Iniciando câmera...</div>
+
+    <div class="medidor">
+      <div class="trilho">
+        <div id="pct" class="preenchimento"></div>
+        <div class="limiar" id="marcaLimiar"><span id="textoLimiar"></span></div>
+      </div>
+      <strong id="pctTexto">0%</strong>
+    </div>
+
+    <div class="acoes" id="acoesVideo">
+      <button class="primario" id="btnFoto">📷 Tirar foto com resultado</button>
+      <button class="destaque oculto" id="btnCadastrar">＋ Cadastrar rosto</button>
+    </div>
+    <div class="acoes oculto" id="acoesFoto">
+      <button class="primario" id="btnBaixar">⬇ Baixar foto</button>
+      <button class="secundario" id="btnNova">↺ Nova consulta</button>
+    </div>
+    <p id="msgFoto" class="aviso"></p>
+
+    <div id="formCadastro" class="cadastro oculto">
+      <h2>Cadastrar rosto</h2>
+      <label for="nome">Nome fictício *</label>
+      <input type="text" id="nome" maxlength="40" placeholder="Ex.: Alex">
+      <small>Não use nome real nem outros dados pessoais.</small>
+
+      <label class="aceite">
+        <input type="checkbox" id="aut">
+        <span><strong>Autorizo</strong> o uso da imagem do meu rosto neste trabalho acadêmico de
+        reconhecimento facial. Sei que é um dado biométrico, guardado só neste navegador, e que
+        posso apagar o cadastro a qualquer momento.</span>
+      </label>
+
+      <div class="progresso oculto" id="progCad"><div id="progBarra"></div></div>
+      <div class="acoes">
+        <button class="destaque" id="btnCapturar" disabled>Capturar e cadastrar</button>
+        <button class="secundario" id="btnCancelar">Cancelar</button>
+      </div>
+      <p id="msgCad" class="aviso"></p>
+    </div>
+  </section>
+
+  <aside>
+    <section class="card melhor">
+      <h2>🏆 Maior correspondência registrada</h2>
+      <div id="melhorConteudo"><small>Tire uma foto com um rosto reconhecido para registrar aqui.</small></div>
+    </section>
+
+    <section class="card">
+      <h2>Rostos cadastrados</h2>
+      <ul id="lista"></ul>
+      <div class="linha-base">
+        <button class="secundario" id="btnExportar">⬇ Exportar base</button>
+        <label>⬆ Importar base<input type="file" id="arqBase" accept=".json" hidden></label>
+      </div>
+      <small>A base fica só neste navegador. Exporte para levar a outro computador.</small>
+    </section>
+  </aside>
+</main>
+
+<footer>Projeto acadêmico — Faculdade Municipal de Palhoça (FMP)</footer>
+<script src="app.js"></script>
+</body>
+</html>
